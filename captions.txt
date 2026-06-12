@@ -1,0 +1,21 @@
+image,caption
+img1.jpg,a dog runs in the green grass
+img1.jpg,a dog playing in a field
+img1.jpg,a brown dog runs outdoors
+img1.jpg,the dog is running outside
+img1.jpg,a dog is sprinting on the lawn
+img2.jpg,a white cat sits on a red sofa
+img2.jpg,a fluffy cat rests on the couch
+img2.jpg,the cat is lounging indoors
+img2.jpg,a feline sits comfortably on furniture
+img2.jpg,a sleeping cat on a red cushion
+img3.jpg,a man rides a bicycle on the street
+img3.jpg,someone cycling down the road
+img3.jpg,a cyclist on a black bike
+img3.jpg,the person is riding a bicycle
+img3.jpg,a bike rider on a paved path
+img4.jpg,two children play in the sand
+img4.jpg,kids playing at the beach
+img4.jpg,young children building a sandcastle
+img4.jpg,a boy and girl play on the shore
+img4.jpg,children having fun in the sand

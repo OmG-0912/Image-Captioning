@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+best_model.keras
+features.pkl
+tokenizer.pkl
+model_metadata.pkl
+temp_uploads/
+logs/
+Images/
