@@ -11,7 +11,7 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3, preprocess_i
 import config
 import dataset
 
-def extract_feature(image_path):
+def extract_feature(image_path, model_cnn=None):
     """
     Extracts features for a single image using InceptionV3.
     """
@@ -25,7 +25,8 @@ def extract_feature(image_path):
     img_array = preprocess_input(img_array)
     
     # Load feature extractor model
-    model_cnn = InceptionV3(weights='imagenet', include_top=False, pooling='avg')
+    if model_cnn is None:
+        model_cnn = InceptionV3(weights='imagenet', include_top=False, pooling='avg')
     
     # Extract feature
     feature = model_cnn.predict(img_array, verbose=0)

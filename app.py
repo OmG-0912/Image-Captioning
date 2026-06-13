@@ -16,18 +16,26 @@ app = Flask(__name__, static_folder='frontend', static_url_path='')
 model_cache = {
     'model': None,
     'tokenizer': None,
-    'max_length': None
+    'max_length': None,
+    'model_cnn': None
 }
 
 def load_prediction_model():
     """
-    Lazy-loads the model and tokenizer into memory.
+    Lazy-loads the model, tokenizer, and feature extractor into memory.
     """
+    # Load CNN feature extractor if not cached
+    if model_cache['model_cnn'] is None:
+        print("🔄 Loading InceptionV3 feature extractor into server cache...")
+        model_cache['model_cnn'] = tf.keras.applications.InceptionV3(weights='imagenet', include_top=False, pooling='avg')
+        print("✅ InceptionV3 model loaded and cached.")
+
     if model_cache['model'] is not None:
         return (
             model_cache['model'], 
             model_cache['tokenizer'], 
-            model_cache['max_length']
+            model_cache['max_length'],
+            model_cache['model_cnn']
         )
         
     if not os.path.exists(config.MODEL_SAVE_PATH):
@@ -62,7 +70,7 @@ def load_prediction_model():
     model_cache['tokenizer'] = tokenizer
     model_cache['max_length'] = max_length
     
-    return model, tokenizer, max_length
+    return model, tokenizer, max_length, model_cache['model_cnn']
 
 @app.route('/')
 def index():
@@ -93,10 +101,10 @@ def get_caption():
         file.save(temp_path)
         
         # Load ML components
-        model, tokenizer, max_length = load_prediction_model()
+        model, tokenizer, max_length, model_cnn = load_prediction_model()
         
         # Extract features and predict
-        feature = predict.extract_feature(temp_path)
+        feature = predict.extract_feature(temp_path, model_cnn=model_cnn)
         caption = predict.generate_caption(model, tokenizer, feature, max_length)
         
         # Clean up temp file
